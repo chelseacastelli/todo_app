@@ -1,4 +1,6 @@
 import React from 'react';
+import Todo from './Todo';
+import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
 import './App.css';
 import { useState } from 'react/cjs/react.development';
 
@@ -24,19 +26,22 @@ function App() {
 
   return (
     <div className="App">
-
-      <h1>My Todo List</h1>
+      <h1>My List</h1>
       <form>
-        {/* es6 javascript */}
-        {/* onChange => captures event every time key is pressed */}
-        <input value={input} onChange={event => setInput(event.target.value)}/>
-        <button type='submit' onClick={addTodo}>Add Todo</button>
+        <FormControl>
+          <InputLabel>✅ Write a Todo</InputLabel>
+          {/* es6 js - onChange => captures event every time key is pressed */}
+          <Input value={input} onChange={event => setInput(event.target.value)}/>
+        </FormControl>
+
+
+        <Button type='submit' onClick={addTodo} variant="contained" color="primary" disabled={!input}>Add Todo</Button>
         <ul>
           {/* map => looping function that returns each item */}
           {/* arrow function */}
           {/* list.map(listItem) */}
           {todos.map(todo => (
-            <li>{todo}</li>
+            <Todo todo={todo}/>
           ))}
         </ul>
         </form>
