@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Todo from './Todo';
 import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
 import './App.css';
 import { useState } from 'react/cjs/react.development';
+import db from './firebase';
 
 function App() {
   // setup state => useState hook
   // [<name of list>, <setVariableName>]
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
+
+  // When the app loads, we need to listen to the db and fetch new todos as they are added/removed
+  useEffect(() => {
+    // this will fire up when app.js loads
+    // everytime db changes, it returns 'snapshot'
+    db.collection('todos').onSnapshot(snapshot => {
+      // go thru every doc, 
+      console.log(snapshot.docs.map(doc => doc.data().todo));
+      setTodos(snapshot.docs.map(doc => doc.data().todo))
+    })
+  }, []);
   
   const addTodo = event => {
     // Don't refresh page on submit
