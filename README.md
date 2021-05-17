@@ -1,4 +1,11 @@
-# Getting Started with Create React App
+# ToDo App using React & Firebase
+
+### Full CRUD app made with JavaScript, React, & Firebase
+
+## Live Link Below
+[Demo](https://todo-app-df454.web.app/)
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
