@@ -9,7 +9,7 @@ function Todo(props) {
             <ListItem>
                 <ListItemAvatar>
                 </ListItemAvatar>
-                    <ListItemText primary={'↪ ' + props.todo} secondary="dummy caption"/>
+                    <ListItemText primary={'↪ ' + props.todo}/>
             </ListItem>
         </List>
     )

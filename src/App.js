@@ -33,6 +33,11 @@ function App() {
 
     // clear input field after submitting
     setInput('');
+
+    // store new todo in db
+    db.collection('todos').add({
+      todo: input
+    });
     
   };
 
