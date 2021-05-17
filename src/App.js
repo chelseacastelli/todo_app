@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Todo from './Todo';
 import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
 import './App.css';
-import { useState } from 'react/cjs/react.development';
 import db from './firebase';
+import firebase from 'firebase';
 
 function App() {
   // setup state => useState hook
@@ -15,9 +15,9 @@ function App() {
   useEffect(() => {
     // this will fire up when app.js loads
     // everytime db changes, it returns 'snapshot'
-    db.collection('todos').onSnapshot(snapshot => {
+    // & displays in db in desc order (newest on top) ➡ based on timestamp
+    db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
       // go thru every doc, 
-      console.log(snapshot.docs.map(doc => doc.data().todo));
       setTodos(snapshot.docs.map(doc => doc.data().todo))
     })
   }, []);
@@ -36,7 +36,8 @@ function App() {
 
     // store new todo in db
     db.collection('todos').add({
-      todo: input
+      todo: input,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
     });
     
   };
