@@ -18,7 +18,7 @@ function App() {
     // & displays in db in desc order (newest on top) ➡ based on timestamp
     db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
       // go thru every doc, 
-      setTodos(snapshot.docs.map(doc => doc.data().todo))
+      setTodos(snapshot.docs.map(doc => ({id: doc.id, todo: doc.data().todo})))
     })
   }, []);
   
